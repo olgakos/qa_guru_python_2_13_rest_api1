@@ -3,7 +3,7 @@ from pytest_voluptuous import S
 from schemas import schemas
 from utils.base_session import reqres_session
 
-#1
+#1 POST CREATE: создать пользователя
 '''
 Request
 /api/users
@@ -40,7 +40,7 @@ def test_create_user():
     assert response.json()["job"] == job
     assert response.json() == S(schemas.create_user_schema)
 
-#2
+#2 PUT UPDATE: перезаписать пользователя
 '''
 Request
 /api/users/2
@@ -76,7 +76,7 @@ def test_update_user_schema():
     assert response.json() == S(schemas.update_user_schema)
 
 
-#3
+#3 DELETE: удалить пользователя
 '''
 Request
 /api/users/2
@@ -88,7 +88,7 @@ def test_delete_user():
     response = reqres_session().delete(url='/api/users/2')
     assert response.status_code == 204
 
-#4
+#4 GET SINGLE USER: показать 1 пользователя
 '''
 Response
 200
@@ -117,8 +117,7 @@ def test_get_single_user():
     assert response.json()["data"]["last_name"] == "Weaver"
     assert response.json() == S(schemas.get_single_user_schema)
 
-
-#5
+#5 POST REGISTER - SUCCESSFUL: регистрация прошла успешно?
 '''
 Request
 /api/register
